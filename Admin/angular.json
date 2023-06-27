@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/thebccampaign",
+            "outputPath": "dist/thebccampaign-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -46,7 +46,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/thebccampaign/",
+              "baseHref": "/thebccampaign-admin/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
