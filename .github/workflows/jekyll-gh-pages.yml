@@ -35,8 +35,23 @@ jobs:
           persist-credentials: false
           path: ./
       - name: copy files
-        run: |
-            cp -R ./Admin/src/app/comments/*.* ./Widget/src/app/comments/
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: './Admin/src/app/comments/'
+          destination-github-username: 'ChrisColeTech'
+          destination-repository-name: 'thebccampaign-admin'
+          user-email:  'moneymagnet216@gmail.com'
+          target-branch: 'main'
+          target-directory: '/Widget/src/app/comments/'
+          
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          path: ./
+    
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
