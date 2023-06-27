@@ -30,7 +30,7 @@ jobs:
             cd ./Admin/src/app/comments/
             dir
             cd ../../../..
-            cp -R *.* ./Widget/src/app/comments/
+            cp -R ./Admin/src/app/comments/*.* ./Widget/src/app/comments/
             
       - name: Setup Pages
         uses: actions/configure-pages@v3
