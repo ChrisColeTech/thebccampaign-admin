@@ -24,7 +24,7 @@ jobs:
         run: |     
             cd ./Admin/src/app/comments/
             dir
-            cp -R ./Admin/src/app/comments/*.* ./Widget/src/app/comments/
+            cp -R /*.* ./Widget/src/app/comments/
             cd ./Widget/src/app/comments/
             dir
       - name: Setup Pages
