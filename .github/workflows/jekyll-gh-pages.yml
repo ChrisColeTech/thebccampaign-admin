@@ -23,11 +23,12 @@ jobs:
       - name: copy files
         run: |     
             dir
+            cd ./Widget/src/app/comments/
+            dir
             cd ./Admin/src/app/comments/
             dir
             cp -R *.* ./Widget/src/app/comments/
-            cd ./Widget/src/app/comments/
-            dir
+            
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Build with Jekyll
