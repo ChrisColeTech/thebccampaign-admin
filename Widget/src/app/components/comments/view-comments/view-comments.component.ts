@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AlertsService } from 'src/app/services/alerts-service/alerts.service';
 
 @Component({
   selector: 'app-view-comments',
@@ -8,15 +10,18 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./view-comments.component.scss']
 })
 export class ViewCommentsComponent implements OnInit {
-  name: string = '';
-  email: string = '';
-  comment: string = '';
+  commentForm: FormGroup;
   comments: any[] = [];
   currentIndex: number = 0;
   displayComment: any = null;
   timerInterval: any = null;
-
-  constructor(private http: HttpClient) { }
+  constructor(private alertsService: AlertsService, private formBuilder: FormBuilder, private http: HttpClient) {
+    this.commentForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      comment: ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
     this.fetchComments();
@@ -24,57 +29,42 @@ export class ViewCommentsComponent implements OnInit {
   }
 
   handleFormSubmit() {
+    if (this.commentForm.invalid) {
+      return;
+    }
+
     const formData = {
-      name: this.name,
-      email: this.email,
-      comment: this.comment
+      name: this.commentForm.value.name.trim(),
+      email: this.commentForm.value.email.trim(),
+      comment: this.commentForm.value.comment.trim()
     };
 
     this.http.post<any>(`${environment.apiUrl}/.netlify/functions/add-comment`, formData)
       .subscribe(result => {
-        console.log('Comment added:', result);
-        this.resetForm();
-        this.fetchComments(); // Refresh comments after adding a new one
+        this.alertsService.showMessage('Comment added', result);
+        this.commentForm.reset();
       }, error => {
-        console.error('Error adding comment:', error);
+        this.alertsService.showError('Error adding comment', error);
+
       });
   }
+
 
   fetchComments() {
     this.http.get<any[]>(`${environment.apiUrl}/.netlify/functions/get-approved-comments`)
       .subscribe(data => {
         this.comments = data;
-        this.currentIndex = 0; // Reset the current index to the first comment
-        this.displayComment = this.comments[this.currentIndex];
+        const randomIndex = Math.floor(Math.random() * this.comments.length); // Gener
+        this.displayComment = this.comments[randomIndex];
       }, error => {
-        console.error('Error fetching comments:', error);
+        this.alertsService.showError('Error fetching comments', error);
+
       });
   }
 
-  resetForm() {
-    this.name = '';
-    this.email = '';
-    this.comment = '';
-  }
-
-  goBack() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.displayComment = this.comments[this.currentIndex];
-    } else {
-      this.currentIndex = this.comments.length - 1; // Set currentIndex to the last comment index
-      this.displayComment = this.comments[this.currentIndex];
-    }
-  }
-
   goForward() {
-    if (this.currentIndex < this.comments.length - 1) {
-      this.currentIndex++;
-      this.displayComment = this.comments[this.currentIndex];
-    } else {
-      this.currentIndex = 0; // Set currentIndex to the first comment index
-      this.displayComment = this.comments[this.currentIndex];
-    }
+    const randomIndex = Math.floor(Math.random() * this.comments.length); // Gener
+    this.displayComment = this.comments[randomIndex];
   }
 
   startTimer() {
