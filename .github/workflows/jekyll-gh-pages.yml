@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run:  cd /thebccampaign-admin && npm install
+        run:  cd /Admin && npm install
       - name: Build Angular app
         run: |
               cd ./Admin
