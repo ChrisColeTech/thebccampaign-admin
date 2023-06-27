@@ -25,11 +25,11 @@ jobs:
             dir
             cd ./Widget/src/app/comments/
             dir
-            cd ../../../../..
+            cd ../../../..
             dir
             cd ./Admin/src/app/comments/
             dir
-            cd ../../../../..
+            cd ../../../..
             cp -R *.* ./Widget/src/app/comments/
             
       - name: Setup Pages
@@ -46,25 +46,20 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          path: ./Admin
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Build Admin tool
         run: |              
-              cd ./Admin/Admin 
+              cd ./Admin
               npm install
               npm run build --prod --base-href=/thebccampaign-admin/
               mkdir -p  ./dist/thebccampaign-admin/thebccampaign-admin
               cp -R ./dist/thebccampaign-admin/*.* ./dist/thebccampaign-admin/thebccampaign-admin
       - name: Build Widget
         run: |
-              cd ./Admin/Widget 
+              cd ./Widget 
               npm install  
               npm run build --prod --base-href=/thebccampaign/
               
@@ -73,7 +68,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: './Admin/Widget/dist/thebccampaign/'
+          source-directory: './Widget/dist/thebccampaign/'
           destination-github-username: 'ChrisColeTech'
           destination-repository-name: 'thebccampaign'
           user-email:  'moneymagnet216@gmail.com'
@@ -83,6 +78,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./Admin/Admin/dist/thebccampaign-admin/
+          publish_dir: ./Admin/dist/thebccampaign-admin/
           enable_jekyll: true
     
