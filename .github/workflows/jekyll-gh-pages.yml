@@ -22,6 +22,7 @@ jobs:
           path: ./
       - name: copy files
         run: |     
+            dir
             cd ./Admin/src/app/comments/
             dir
             cp -R *.* ./Widget/src/app/comments/
