@@ -1,29 +1,64 @@
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Approve Comments</h5>
-                <p class="card-text">Review and approve comments for publication.</p>
-                <a mat-raised-button color="primary" routerLink="approve-comments">Go to Approve Comments</a>
+<div class="comments-page">
+    <div class="container">
+        <h1 class="page-title">Administer Comments</h1>
+        <p class="tagline">Empowering Dialogue, Safeguarding Security</p>
+        <p class="page-description">This page is designed for campaign administrators to manage comments and ensure a
+            secure and engaging environment for online discussions.</p>
+        <h2 class="section-title">Features:</h2>
+        <ul class="features-list">
+            <li><strong>Security</strong> Highly secure platform to protect user data and maintain confidentiality.</li>
+            <li><strong>View Comments</strong> Access and manage published comments. The page includes a 'Donate'
+                button to facilitate
+                campaign contributions, sponsorships, and endorsements.</li>
+
+            <li><strong>Export Comments</strong> Seamlessly export all approved and unapproved comments to a flat XLSX
+                file for
+                comprehensive analysis. The comments are unordered, allowing flexibility to apply filtering, grouping,
+                sorting, and more using Excel's powerful functionalities.</li>
+        </ul>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Approve Comments</h5>
+                        <p class="card-text">Review and approve comments for publication to foster meaningful
+                            discussions.</p>
+                        <a mat-raised-button color="primary" routerLink="approve-comments">Go to Approve Comments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Comments</h5>
+                        <p class="card-text">Explore and manage published comments to gain insights and respond
+                            effectively.</p>
+                        <a mat-raised-button color="primary" routerLink="view-comments">Go to View Comments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Export Comments</h5>
+                        <p class="card-text">Download comments as an Excel file for comprehensive analysis and data
+                            exploration.</p>
+                        <a mat-raised-button color="primary" routerLink="export-comments">Go to Export Comments</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">View Comments</h5>
-                <p class="card-text">View and manage published comments.</p>
-                <a mat-raised-button color="primary" routerLink="view-comments">Go to View Comments</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Export Comments</h5>
-                <p class="card-text">Download comments as an Excel file.</p>
-                <a mat-raised-button color="primary" routerLink="export-comments">Go to View Comments</a>
-            </div>
-        </div>
+
+        <h2 class="section-title">Please Note:</h2>
+        <ul class="notes-list">
+            <li><strong>Permanent approvals</strong> Once a comment is approved, it cannot be undone unless overridden
+                by a Database
+                Administrator (DBA).</li>
+            <li><strong>Permanent deletes</strong> Deleted comments are permanently removed from the system.</li>
+            <li><strong>Changes Impacting Widget</strong> Modifications made on the 'View Comments' page will reflect
+                on the
+                public-facing Widget, ensuring consistent messaging and user experience.</li>
+        </ul>
     </div>
 </div>
