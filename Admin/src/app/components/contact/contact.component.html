@@ -1,1 +1,48 @@
-<p>contact works!</p>
+<div class="container">
+    <h2 class="page-title">Contact Us</h2>
+    <p class="tagline">Join the Conversation, Make a Difference</p>
+
+    <div class="contact-info">
+        <p>Thank you for considering reaching out to our organization. We are delighted that an amazing individual like
+            you is taking the initiative to contact us. Your contribution and engagement are instrumental in shaping our
+            political campaign and the communities we aim to serve.</p>
+        <p>We warmly welcome your comments, thoughts, and insights on various topics, including local issues, housing
+            concerns, environmental initiatives, or any matter that impacts our community. Additionally, if you have a
+            request for the candidate to participate in a local event or deliver a compelling speech, we are here to
+            listen and respond to your aspirations.</p>
+        <p>Every contact request we receive undergoes a meticulous moderation process. Our dedicated team of experts
+            ensures that each message is treated with care and attention, carefully reviewed, analyzed, and prioritized
+            based on its significance and potential impact. We deeply value the authentic feedback and thoughtful
+            contributions from our esteemed users like you.</p>
+    </div>
+
+    <div class="contact-form">
+        <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+            <mat-form-field class="form-group">
+                <mat-label>Your Name</mat-label>
+                <input matInput type="text" formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Your Email</mat-label>
+                <input matInput type="email" formControlName="email" required>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Your Message</mat-label>
+                <textarea matInput formControlName="message" rows="5" required></textarea>
+            </mat-form-field>
+            <div class="button-container">
+                <button mat-raised-button class="btn-submit" type="submit">Send Message</button>
+
+            </div>
+        </form>
+    </div>
+
+    <h2 class="section-title">Please Note:</h2>
+    <ul class="notes-list">
+        <li><strong>Spam Detection</strong> For your peace of mind, we have implemented robust spam detection measures,
+            and rest assured, every IP
+            address is meticulously tracked to prevent any misuse and maintain the integrity of our communication
+            channels. Safeguarding your privacy and security is our utmost priority, ensuring a trusted and reliable
+            environment for meaningful conversations.</li>
+    </ul>
+</div>

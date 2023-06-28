@@ -1,6 +1,6 @@
 {
     "/.netlify/functions/*": {
-        "target": "https://thriving-tanuki-c43811.netlify.app/",
+        "target": "https://gh-pages--silly-taiyaki-54de12.netlify.app/",
         "secure": false,
         "changeOrigin": true
     }
