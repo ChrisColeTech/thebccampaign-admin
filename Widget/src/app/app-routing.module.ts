@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ViewCommentsComponent } from './components/comments/view-comments/view-comments.component';
 
+import { ViewCommentsComponent } from './comments/view-comments/view-comments.component';
 
 const routes: Routes = [
   {

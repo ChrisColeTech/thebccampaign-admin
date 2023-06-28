@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { ApproveCommentsComponent } from './components/comments/approve-comments/approve-comments.component';
-import { CommentsComponent } from './components/comments/comments.component';
-import { ExportCommentsComponent } from './components/comments/export-comments/export-comments.component';
-import { ViewCommentsComponent } from './components/comments/view-comments/view-comments.component';
-import { ContactComponent } from './components/contact/contact.component';
+import { HomeComponent } from './home/home.component';
+import { ApproveCommentsComponent } from './comments/approve-comments/approve-comments.component';
+import { ViewCommentsComponent } from './comments/view-comments/view-comments.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { CommentsComponent } from './comments/comments.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,8 +14,7 @@ const routes: Routes = [
     path: 'comments', children: [
       { path: '', component: CommentsComponent },
       { path: 'approve-comments', component: ApproveCommentsComponent },
-      { path: 'view-comments', component: ViewCommentsComponent },
-      { path: 'export-comments', component: ExportCommentsComponent }
+      { path: 'view-comments', component: ViewCommentsComponent }
     ]
   },
   { path: 'about', component: AboutComponent },
