@@ -29,7 +29,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/netlify",
-              "src/package.json"
+              "src/package.json",
+              "src/_headers"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
