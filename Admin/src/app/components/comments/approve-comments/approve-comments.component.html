@@ -47,6 +47,7 @@
                 <div class="comment-details">
                     <p class="comment-author"><strong>{{ comment.data.name }}</strong> <em class="comment-timestamp">{{
                             comment.data.timestamp | date: 'shortDate'}}</em></p>
+                    <p class="comment-email">{{ comment.data.email }}</p>
                     <p class="comment-text">{{ comment.data.comment }}</p>
 
                 </div>
