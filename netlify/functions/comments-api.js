@@ -1,5 +1,5 @@
 const createRoute = require('./add-comment.js')
-const deleteRoute = require('./delete.js')
+const deleteRoute = require('./delete-comment.js')
 const readAllRoute = require('./read-all.js')
 const readRoute = require('./read.js')
 const updateRoute = require('./update.js')
