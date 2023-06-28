@@ -1,10 +1,13 @@
 const { Client, query } = require('faunadb');
-
+const { handleOptions } = require('./handleOptions');
 /* Configure faunaDB Client with our secret */
 const client = new Client({ secret: 'fnAFG-Ky5LAATX9wNckFUbX0ngbxY2jv_PlqSUVN' });
 
 /* Export our lambda function as named "handler" export */
 const handler = async (event) => {
+  if (event.httpMethod === "OPTIONS") {
+    return handleOptions(event);
+  }
   /* Parse the string body into a usable JS object */
   const data = JSON.parse(event.body);
   console.log('Function `create` invoked', data);
