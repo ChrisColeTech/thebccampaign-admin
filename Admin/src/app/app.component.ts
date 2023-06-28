@@ -29,7 +29,7 @@ export class AppComponent {
     // Subscribe to router events
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.closeSidenav();
+        // this.closeSidenav();
       }
     });
   }
