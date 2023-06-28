@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://gh-pages--silly-taiyaki-54de12.netlify.app/'
+    apiUrl: 'https://thriving-tanuki-c43811.netlify.app'
 };

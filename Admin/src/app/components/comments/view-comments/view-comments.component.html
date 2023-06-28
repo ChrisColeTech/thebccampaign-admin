@@ -1,0 +1,57 @@
+<div class="comment-carousel">
+    <div class="carousel-comment" *ngIf="displayComment">
+        <h4 class="carousel-comment-text">{{ displayComment.comment }}</h4>
+        <p class="carousel-comment-author"><em>-{{ displayComment.name }}</em></p>
+    </div>
+</div>
+
+<div id="commentForm">
+    <form [formGroup]="commentForm" (ngSubmit)="handleFormSubmit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Name" required>
+            <mat-error *ngIf="commentForm.get('name').invalid">
+                Name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="Email" required>
+            <mat-error *ngIf="commentForm.get('email').invalid">
+                Email is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Comment</mat-label>
+            <textarea matInput type="text" formControlName="comment" placeholder="Comment" required></textarea>
+            <mat-error *ngIf="commentForm.get('comment').invalid">
+                Comment is required
+            </mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+            <button mat-raised-button type="submit">Submit</button>
+        </div>
+    </form>
+
+</div>
+
+
+
+<div class="donate">
+    <img src="./assets/paypal-donate.png" alt="">
+</div>
+
+
+<div class="comments-stack">
+    <div class="comment-container" *ngFor="let comment of comments; let i = index">
+        <div class="initial-square">{{ comment.name.charAt(0) }}</div>
+        <div class="comment-details">
+            <p class="comment-author"><strong>{{ comment.name }}</strong> <em class="comment-timestamp">{{
+                    comment.timestamp | date: 'shortDate' }}</em></p>
+            <p class="comment-text">{{ comment.comment }}</p>
+        </div>
+    </div>
+</div>
