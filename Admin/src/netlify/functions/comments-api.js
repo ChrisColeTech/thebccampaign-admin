@@ -9,6 +9,8 @@ const handler = async (event, context) => {
   const segments = path.split('/').filter(Boolean)
 
   switch (event.httpMethod) {
+    case "OPTIONS":
+      return handleOptions(event);
     case 'GET':
       // e.g. GET /.netlify/functions/fauna-crud
       if (segments.length === 0) {
@@ -57,6 +59,26 @@ const handler = async (event, context) => {
         body: 'unrecognized HTTP Method, must be one of GET/POST/PUT/DELETE',
       }
   }
+}
+
+function handleOptions(event) {
+  return {
+    statusCode: 200,
+    headers: {
+      ...getCorsHeaders(),
+    },
+  };
+}
+
+function getCorsHeaders() {
+  return {
+    "access-control-allow-methods": "POST,OPTIONS",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept",
+    "Access-Control-Max-Age": "2592000",
+    "Access-Control-Allow-Credentials": "true",
+  };
 }
 
 module.exports = { handler }
