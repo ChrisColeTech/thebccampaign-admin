@@ -5,7 +5,12 @@ const handler = async (event) => {
         const response = await client.query(
             query.Map(
                 query.Paginate(
-                    query.Documents(query.Collection('users'))
+                    query.Filter(
+                        query.Documents(query.Collection('users')),
+                        query.Lambda(
+                            (x) => query.Not(query.Select(['data', 'approved'], query.Get(x)))
+                        )
+                    )
                 ),
                 query.Lambda(
                     (x) => {

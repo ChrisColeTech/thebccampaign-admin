@@ -1,5 +1,5 @@
 const { client, query, handleOptions } = require('./faunaClient');
-
+const jwt = require('jsonwebtoken');
 
 /* Export our lambda function as named "handler" export */
 const handler = async (event) => {
@@ -17,8 +17,8 @@ const handler = async (event) => {
         const response = await client.query(
             query.Get(query.Match(query.Index('users_by_username'), username))
         );
-
-        if (!response.data || response.data.password !== password) {
+        console.log(response);
+        if (!response || response.data.password !== password) {
             throw new Error('Invalid username or password');
         }
 

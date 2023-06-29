@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user/user-service';
 
 @Component({
@@ -7,16 +8,32 @@ import { UserService } from 'src/app/services/user/user-service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  users: any[];
+  users: any[] = [];
+  displayedColumns: string[] = ['username', 'email', 'actions'];
 
-  constructor(private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(response => {
-      console.log('Get Users Response:', response);
-      this.users = response;
+    this.getUsers();
+  }
+
+  getUsers(): void {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+    });
+  }
+
+  editUser(user: any): void {
+    this.router.navigate([`update-user/${user.id}`]);
+  }
+
+  deleteUser(user: any): void {
+    // Call the deleteUser method on the user service
+    this.userService.deleteUser(user).subscribe(response => {
+      console.log('Delete User Response:', response);
+      // Handle success response
     }, error => {
-      console.log('Get Users Error:', error);
+      console.log('Delete User Error:', error);
       // Handle error response
     });
   }
