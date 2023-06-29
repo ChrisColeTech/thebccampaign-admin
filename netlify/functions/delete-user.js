@@ -1,6 +1,6 @@
 const { client, query, handleOptions } = require('./faunaClient');
 
-const deleteUser = async (event) => {
+const handler = async (event) => {
     if (event.httpMethod === "OPTIONS") {
         return handleOptions(event);
     }
@@ -29,4 +29,4 @@ const deleteUser = async (event) => {
     }
 };
 
-module.exports = { deleteUser };
+module.exports = { handler };
