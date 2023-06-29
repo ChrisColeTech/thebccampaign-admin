@@ -13,6 +13,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from '../app-routing.module';
+import { UsersComponent } from './users/users.component';
+import { CreateUserComponent } from './users/create-user/create-user.component';
+import { UpdateUserComponent } from './users/update-user/update-user.component';
+import { DeleteUserComponent } from './users/delete-user/delete-user.component';
+import { ApproveUserComponent } from './users/approve-user/approve-user.component';
+import { LoginComponent } from './users/login/login.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +28,13 @@ import { AppRoutingModule } from '../app-routing.module';
         ContactComponent,
         ViewCommentsComponent,
         ApproveCommentsComponent,
-        ExportCommentsComponent
+        ExportCommentsComponent,
+        UsersComponent,
+        CreateUserComponent,
+        UpdateUserComponent,
+        DeleteUserComponent,
+        ApproveUserComponent,
+        LoginComponent
     ],
     imports: [
         AppRoutingModule,

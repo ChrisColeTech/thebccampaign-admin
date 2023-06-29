@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { AlertsService } from 'src/app/services/alerts-service/alerts.service';
 import { environment } from 'src/environments/environment';
+import { CommentService } from 'src/app/services/comments/comments-service';
 
 @Component({
   selector: 'app-export-comments',
@@ -10,10 +11,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./export-comments.component.scss']
 })
 export class ExportCommentsComponent {
-  constructor(private http: HttpClient, private alertsService: AlertsService) { }
+  constructor(private http: HttpClient, private alertsService: AlertsService, private commentService: CommentService) { }
 
   exportToExcel() {
-    this.http.get<any[]>(`${environment.apiUrl}/.netlify/functions/get-comments`)
+    this.commentService.getComments()
       .subscribe(data => {
         const workbook = XLSX.utils.book_new();
         const worksheet = XLSX.utils.json_to_sheet(data);

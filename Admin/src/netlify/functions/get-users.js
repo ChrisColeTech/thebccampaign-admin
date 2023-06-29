@@ -1,23 +1,22 @@
-const { client, query, handleOptions } = require('./faunaClient');
+const { client, query } = require('./faunaClient');
 
 const handler = async (event) => {
-    if (event.httpMethod === "OPTIONS") {
-        return handleOptions(event);
-    }
-
-    console.log('Function `getUsers` invoked');
-    // Logic to retrieve users from the database
-
     try {
-        const response = await client.query(query.Paginate(query.Match(query.Index('all_users'))));
+        const response = await client.query(
+            query.Map(
+                query.Paginate(query.Documents(query.Collection('users'))),
+                query.Lambda((x) => query.Get(x))
+            )
+        );
         console.log('Success', response);
+        const users = response.data.map((user) => user.data);
         return {
             statusCode: 200,
             headers: {
                 'Access-Control-Allow-Origin': '*', // Allow requests from any origin
                 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
             },
-            body: JSON.stringify(response),
+            body: JSON.stringify(users),
         };
     } catch (error) {
         console.log('Error', error);
