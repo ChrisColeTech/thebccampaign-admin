@@ -18,7 +18,7 @@ import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { DeleteUserComponent } from './users/delete-user/delete-user.component';
 import { ApproveUserComponent } from './users/approve-user/approve-user.component';
-import { LoginComponent } from './users/login/login.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [

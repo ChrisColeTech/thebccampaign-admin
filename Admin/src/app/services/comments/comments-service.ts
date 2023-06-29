@@ -17,24 +17,16 @@ export class CommentService {
         );
     }
 
-    updateComment(id: string, comment: any): Observable<any> {
-        return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/update-comment`, comment).pipe(
+    deleteComment(comment): Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/.netlify/functions/delete-comment`, comment).pipe(
             catchError(error => {
                 return throwError(error);
             })
         );
     }
 
-    deleteComment(id: string): Observable<any> {
-        return this.http.delete<any>(`${environment.apiUrl}/.netlify/functions/delete-comment`).pipe(
-            catchError(error => {
-                return throwError(error);
-            })
-        );
-    }
-
-    approveComment(id: string): Observable<any> {
-        return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/approve-comment`, null).pipe(
+    approveComment(comment): Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/.netlify/functions/approve-comment`, comment).pipe(
             catchError(error => {
                 return throwError(error);
             })

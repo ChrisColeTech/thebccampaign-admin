@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user-service';
 
 @Component({
-  selector: 'app-get-users',
-  templateUrl: './get-users.component.html',
-  styleUrls: ['./get-users.component.css']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
   users: any[];
