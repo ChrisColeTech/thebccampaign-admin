@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,7 @@ export class UserService {
     }
 
     login(username: string, password: string): Observable<boolean> {
-        return this.http.post<any>('/api/login', { username, password }).pipe(
+        return this.http.post<any>(`${environment.apiUrl}/.netlify/functions/login`, { username, password }).pipe(
             map(response => {
                 if (response.success) {
                     this.authenticated = true;
@@ -34,15 +35,7 @@ export class UserService {
     }
 
     createUser(user: any): Observable<any> {
-        return this.http.post<any>('/api/users', user).pipe(
-            catchError(error => {
-                return throwError(error);
-            })
-        );
-    }
-
-    getUser(id: string): Observable<any> {
-        return this.http.get<any>(`/api/users/${id}`).pipe(
+        return this.http.post<any>(`${environment.apiUrl}/.netlify/functions/create-user`, user).pipe(
             catchError(error => {
                 return throwError(error);
             })
@@ -50,7 +43,7 @@ export class UserService {
     }
 
     updateUser(id: string, user: any): Observable<any> {
-        return this.http.put<any>(`/api/users/${id}`, user).pipe(
+        return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/update-user`, user).pipe(
             catchError(error => {
                 return throwError(error);
             })
@@ -58,7 +51,7 @@ export class UserService {
     }
 
     deleteUser(id: string): Observable<any> {
-        return this.http.delete<any>(`/api/users/${id}`).pipe(
+        return this.http.delete<any>(`${environment.apiUrl}/.netlify/functions/delete-user`).pipe(
             catchError(error => {
                 return throwError(error);
             })
@@ -66,7 +59,7 @@ export class UserService {
     }
 
     approveUser(id: string): Observable<any> {
-        return this.http.put<any>(`/api/users/${id}/approve`, null).pipe(
+        return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/approve-user`, null).pipe(
             catchError(error => {
                 return throwError(error);
             })

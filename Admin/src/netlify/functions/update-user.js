@@ -1,7 +1,5 @@
-const { Client, query } = require('faunadb');
-const { handleOptions } = require('./handleOptions');
-/* Configure faunaDB Client with our secret */
-const client = new Client({ secret: 'fnAFG-Ky5LAATX9wNckFUbX0ngbxY2jv_PlqSUVN' });
+const { client, query, handleOptions } = require('./faunaClient');
+
 
 const updateUser = async (event) => {
     if (event.httpMethod === "OPTIONS") {

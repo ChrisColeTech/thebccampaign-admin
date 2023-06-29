@@ -1,7 +1,4 @@
-const { Client, query } = require('faunadb')
-
-/* configure faunaDB Client with our secret */
-const client = new Client({ secret: 'fnAFG-Ky5LAATX9wNckFUbX0ngbxY2jv_PlqSUVN' });
+const { client, query, handleOptions } = require('./faunaClient');
 
 const handler = async (event, context) => {
   const { ref } = event.queryStringParameters || {}; // Access the 'ref' parameter from the query string

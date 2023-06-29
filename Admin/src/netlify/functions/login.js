@@ -1,9 +1,5 @@
-const { Client, query } = require('faunadb');
-const { handleOptions } = require('./handleOptions');
-const jwt = require('jsonwebtoken');
+const { client, query, handleOptions } = require('./faunaClient');
 
-/* Configure faunaDB Client with our secret */
-const client = new Client({ secret: 'fnAFG-Ky5LAATX9wNckFUbX0ngbxY2jv_PlqSUVN' });
 
 /* Export our lambda function as named "handler" export */
 const handler = async (event) => {

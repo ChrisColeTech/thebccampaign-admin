@@ -1,10 +1,6 @@
-/* bootstrap database in your FaunaDB account - use with `netlify dev:exec <path-to-this-file>` */
-const { Client, query } = require('faunadb')
+const { client, query, handleOptions } = require('./faunaClient');
 
 const createFaunaDB = async function () {
-  /* configure faunaDB Client with our secret */
-  const client = new Client({ secret: 'fnAFG-Ky5LAATX9wNckFUbX0ngbxY2jv_PlqSUVN' });
-
   /* Based on your requirements, change the schema here */
   try {
     await client.query(query.CreateCollection({ name: 'comments' }))
