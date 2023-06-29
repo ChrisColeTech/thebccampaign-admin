@@ -9,6 +9,8 @@ const createUser = async (event) => {
     const data = JSON.parse(event.body);
     console.log('Function `createUser` invoked', data);
     // Logic to create a user in the database
+    const { username, email, password } = data;
+    const item = { data: { username, email, password, timestamp: new Date().toISOString(), approved: false } };
 
     try {
         const response = await client.query(query.Create(query.Collection('users'), item));
