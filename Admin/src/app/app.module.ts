@@ -25,7 +25,8 @@ import { ComponentsModule } from './components/components.module';
     BrowserModule,
     MaterialModule,
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
 
   bootstrap: [AppComponent]
 })

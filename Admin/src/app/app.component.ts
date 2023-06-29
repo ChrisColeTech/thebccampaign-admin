@@ -16,7 +16,15 @@ export class AppComponent {
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
+  dropdownVisible: boolean = false;
 
+  showDropdown(): void {
+    this.dropdownVisible = true;
+  }
+
+  hideDropdown(): void {
+    this.dropdownVisible = false;
+  }
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,

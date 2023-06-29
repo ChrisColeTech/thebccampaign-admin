@@ -5,6 +5,12 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <span>Campaign Comments</span>
+            <div class="user-dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+                <span class="user-name">John Doe</span> <!-- Replace "John Doe" with the user's name variable -->
+                <div class="dropdown-content" [class.show]="dropdownVisible">
+                    <a href="#">Logout</a>
+                </div>
+            </div>
         </mat-toolbar>
 
         <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

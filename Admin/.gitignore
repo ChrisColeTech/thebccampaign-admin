@@ -43,3 +43,4 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+src/node_modules
