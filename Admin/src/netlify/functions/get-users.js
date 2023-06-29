@@ -1,6 +1,6 @@
 const { client, query, handleOptions } = require('./faunaClient');
 
-const getUsers = async (event) => {
+const handler = async (event) => {
     if (event.httpMethod === "OPTIONS") {
         return handleOptions(event);
     }
@@ -28,4 +28,4 @@ const getUsers = async (event) => {
     }
 };
 
-module.exports = { getUsers };
+module.exports = { handler };
