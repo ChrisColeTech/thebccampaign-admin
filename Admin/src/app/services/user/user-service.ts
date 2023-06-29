@@ -42,7 +42,7 @@ export class UserService {
         );
     }
 
-    updateUser(id: string, user: any): Observable<any> {
+    updateUser(user): Observable<any> {
         return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/update-user`, user).pipe(
             catchError(error => {
                 return throwError(error);
@@ -50,16 +50,16 @@ export class UserService {
         );
     }
 
-    deleteUser(id: string): Observable<any> {
-        return this.http.delete<any>(`${environment.apiUrl}/.netlify/functions/delete-user`).pipe(
+    deleteUser(user): Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/.netlify/functions/delete-user`, user).pipe(
             catchError(error => {
                 return throwError(error);
             })
         );
     }
 
-    approveUser(id: string): Observable<any> {
-        return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/approve-user`, null).pipe(
+    approveUser(user): Observable<any> {
+        return this.http.put<any>(`${environment.apiUrl}/.netlify/functions/approve-user`, user).pipe(
             catchError(error => {
                 return throwError(error);
             })
@@ -68,5 +68,9 @@ export class UserService {
 
     getUsers(): Observable<any[]> {
         return this.http.get<any[]>(`${environment.apiUrl}/.netlify/functions/get-users`);
+    }
+
+    getUser(ref): Observable<any[]> {
+        return this.http.get<any[]>(`${environment.apiUrl}/.netlify/functions/get-user/${ref}`);
     }
 }

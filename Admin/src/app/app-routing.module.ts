@@ -10,10 +10,10 @@ import { ViewCommentsComponent } from './components/comments/view-comments/view-
 import { ContactComponent } from './components/contact/contact.component';
 import { UpdateUserComponent } from './components/users/update-user/update-user.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
-import { ApproveUserComponent } from './components/users/approve-user/approve-user.component';
 import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './shared/security/auth.guard';
+import { ApproveUsersComponent } from './components/users/approve-users/approve-users.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,9 +30,9 @@ const routes: Routes = [
   {
     path: 'users', canActivate: [AuthGuard], children: [
       { path: '', component: UsersComponent },
-      { path: 'approve-users', component: ApproveUserComponent },
+      { path: 'approve-users', component: ApproveUsersComponent },
       { path: 'create-user', component: CreateUserComponent },
-      { path: 'update-user', component: UpdateUserComponent }
+      { path: 'update-user/:id', component: UpdateUserComponent },
     ]
   },
   { path: 'login', component: LoginComponent },
