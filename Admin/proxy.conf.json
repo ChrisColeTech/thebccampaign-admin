@@ -1,6 +1,6 @@
 {
     "/.netlify/functions/*": {
-        "target": "https://gh-pages--silly-taiyaki-54de12.netlify.app/",
+        "target": "https://chriscoletech.netlify.app/",
         "secure": false,
         "changeOrigin": true
     }
