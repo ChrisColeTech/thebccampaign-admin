@@ -1,15 +1,20 @@
 const { client, query, handleOptions } = require('./faunaClient');
 
-const getUsers = async (event) => {
+const handler = async (event) => {
     if (event.httpMethod === "OPTIONS") {
         return handleOptions(event);
     }
-
-    console.log('Function `getUsers` invoked');
-    // Logic to retrieve users from the database
+    const data = JSON.parse(event.body);
+    const { ref } = data;
+    console.log(`Function 'update' invoked. Update user with ref: ${ref}`);
 
     try {
-        const response = await client.query(query.Paginate(query.Match(query.Index('all_users'))));
+        const response = await client.query(query.Update(query.Ref(query.Collection('user'), ref), {
+            data: {
+                approved: true, // Set the 'approved' field to 'true'
+            },
+        }))
+
         console.log('Success', response);
         return {
             statusCode: 200,
@@ -28,4 +33,6 @@ const getUsers = async (event) => {
     }
 };
 
-module.exports = { getUsers };
+
+
+module.exports = { handler };
