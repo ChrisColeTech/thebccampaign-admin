@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://chriscoletech.netlify.app/'
+    apiUrl: 'https://thebccampaign.netlify.app/'
 };

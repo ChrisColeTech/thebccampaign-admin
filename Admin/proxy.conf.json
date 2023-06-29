@@ -1,6 +1,6 @@
 {
     "/.netlify/functions/*": {
-        "target": "https://chriscoletech.netlify.app/",
+        "target": "https://thebccampaign.netlify.app/",
         "secure": false,
         "changeOrigin": true
     }
