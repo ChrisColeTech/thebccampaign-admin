@@ -2,7 +2,8 @@
 const { client, query } = require('./faunaClient');
 
 const handler = async (event) => {
-    const { ref } = event.queryStringParameters || {}; // Access the 'ref' parameter from the query string
+    const data = JSON.parse(event.body);
+    const { ref } = data;
     console.log(`Function 'read' invoked. Read ref: ${ref}`);
     try {
         const response = await client.query(query.Get(query.Ref(query.Collection('users'), ref)))

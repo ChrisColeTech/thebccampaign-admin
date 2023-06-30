@@ -8,7 +8,7 @@ const handler = async (event) => {
     const { ref } = data;
     console.log(`Function 'delete' invoked. delete ref: ${ref}`)
     try {
-        const response = await client.query(query.Delete(query.Ref(query.Collection('users'), id)));
+        const response = await client.query(query.Delete(query.Ref(query.Collection('users'), ref)));
         console.log('Success', response);
         return {
             statusCode: 200,

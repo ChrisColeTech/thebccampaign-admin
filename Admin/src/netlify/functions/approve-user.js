@@ -9,7 +9,7 @@ const handler = async (event) => {
     console.log(`Function 'update' invoked. approve user with ref: ${ref}`);
 
     try {
-        const response = await client.query(query.Update(query.Ref(query.Collection('user'), ref), {
+        const response = await client.query(query.Update(query.Ref(query.Collection('users'), ref), {
             data: {
                 approved: true, // Set the 'approved' field to 'true'
             },

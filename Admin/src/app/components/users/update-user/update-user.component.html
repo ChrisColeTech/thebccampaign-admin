@@ -1,8 +1,6 @@
 <h2>Update User</h2>
+<p class="tagline">Connecting People, Building Communities</p>
 <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
-    <mat-form-field>
-        <input matInput placeholder="User ID" formControlName="id" required>
-    </mat-form-field>
     <mat-form-field>
         <input matInput placeholder="Username" formControlName="username" required>
     </mat-form-field>
@@ -12,5 +10,6 @@
     <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" required>
     </mat-form-field>
+    <mat-slide-toggle formControlName="approved" color="primary">Approved</mat-slide-toggle>
     <button mat-raised-button color="primary" type="submit" [disabled]="updateUserForm.invalid">Update User</button>
 </form>

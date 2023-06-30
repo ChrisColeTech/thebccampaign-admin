@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts-service/alerts.service';
 import { UserService } from 'src/app/services/user/user-service';
 
 @Component({
@@ -9,9 +10,9 @@ import { UserService } from 'src/app/services/user/user-service';
 })
 export class UsersComponent implements OnInit {
   users: any[] = [];
-  displayedColumns: string[] = ['username', 'email', 'actions'];
+  displayedColumns: string[] = ['username', 'email', 'approved', 'actions'];
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private alertsService: AlertsService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -23,17 +24,18 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  editUser(user: any): void {
-    this.router.navigate([`update-user/${user.id}`]);
+  editUser(id: any): void {
+    this.router.navigate(['users/update-user', id]);
   }
 
-  deleteUser(user: any): void {
+  deleteUser(id: any): void {
     // Call the deleteUser method on the user service
-    this.userService.deleteUser(user).subscribe(response => {
-      console.log('Delete User Response:', response);
+    this.userService.deleteUser({ ref: id }).subscribe(response => {
+      this.alertsService.showMessage('Successfully deleted user', response);
+      this.getUsers();
       // Handle success response
     }, error => {
-      console.log('Delete User Error:', error);
+      this.alertsService.showError('Delete User Error:', error);
       // Handle error response
     });
   }

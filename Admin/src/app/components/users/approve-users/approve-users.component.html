@@ -1,4 +1,128 @@
-<h2>Get Users</h2>
-<ul>
-    <li *ngFor="let user of users">{{ user.username }} - {{ user.email }}</li>
-</ul>
+<h1 class="page-title">Users</h1>
+<p class="tagline">Connecting People, Building Communities</p>
+
+
+<div class="desktop-view mat-elevation-z8" *ngIf="users.length > 0">
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+        <!-- Column definitions -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="toggleAllSelection()" [checked]="isAllSelected()"
+                    [indeterminate]="isSomeSelected()"></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let user">
+                <mat-checkbox (change)="toggleUserSelection(user)"
+                    [checked]="selectedUsers.includes(user)"></mat-checkbox>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let user"> {{ user.data.username }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let user"> {{ user.data.email }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approved">
+            <th mat-header-cell *matHeaderCellDef> Approved </th>
+            <td mat-cell *matCellDef="let user"> {{ user.data.approved }} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let user">
+                <button mat-button color="primary" (click)="approveUser(user.ref['@ref'].id)">
+                    Approve
+                </button>
+                <button mat-button color="warn" (click)="denyUser(user.ref['@ref'].id)">
+                    Deny
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="bulkActions">
+            <th mat-footer-cell *matFooterCellDef colspan="4">
+                <div class="bulk-actions sticky-footer">
+                    <button mat-button color="primary" (click)="bulkApprove()" [disabled]="selectedUsers.length === 0">
+                        Bulk Approve
+                    </button>
+                    <button mat-button color="warn" (click)="bulkDeny()" [disabled]="selectedUsers.length === 0">
+                        Bulk Deny
+                    </button>
+                </div>
+            </th>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let user; columns: displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="['bulkActions']; sticky: true" class="sticky-footer"></tr>
+
+
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div class="mobile-view" *ngIf="users.length > 0">
+    <div class="card-container">
+        <mat-card *ngFor="let user of users" class="comment-card">
+            <mat-card-content class="comment-container">
+                <div class="initial-square">{{ user.data.username.charAt(0) }}</div>
+
+                <div class="comment-details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>Username</strong></p>
+                                <p>{{ user.data.username }}</p>
+                            </div>
+                            <div class="col">
+                                <p><strong>email</strong></p>
+                                <p>{{ user.data.email }}</p>
+                            </div>
+                            <div class="col">
+                                <p><strong>approved</strong></p>
+                                <p>{{ user.data.approved }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-icon-button color="primary" (click)="approveUser(user.ref['@ref'].id)">
+                    <mat-icon>done</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="denyUser(user.ref['@ref'].id)">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="users.length === 0">
+    <div class="empty-message">
+        <p class="empty-message-heading">No users to approve</p>
+        <p class="empty-message-text">Thank you for your dedication to managing the community!</p>
+        <p class="empty-message-text"> Currently, there are no
+            users awaiting approval. This is a testament to the vibrant and engaged community you have built.
+            Keep
+            up
+            the good work!</p>
+        <p class="empty-message-text">To attract more users and continue growing our community, consider the following:
+        </p>
+        <ul class="empty-message-list">
+            <li class="empty-message-list-item">Promote our community on social media platforms</li>
+            <li class="empty-message-list-item">Encourage existing members to invite their friends and colleagues</li>
+            <li class="empty-message-list-item">Organize engaging events or discussions to attract new members</li>
+            <li class="empty-message-list-item">Ensure our community's values and mission are clearly communicated</li>
+        </ul>
+        <p class="empty-message-text">Remember, each new member brings unique perspectives and contributions that enrich
+            the community experience. Together, you can create something amazing!</p>
+    </div>
+</div>

@@ -1,27 +1,79 @@
-<h2>Get Users</h2>
-<table mat-table [dataSource]="users" class="mat-elevation-z8">
-    <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef> Username </th>
-        <td mat-cell *matCellDef="let user"> {{ user.data.username }} </td>
-    </ng-container>
+<h1 class="page-title">Users</h1>
+<p class="tagline">Connecting People, Building Communities</p>
 
-    <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let user"> {{ user.data.email }} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let user">
-            <button mat-icon-button color="primary" (click)="editUser(user.ref['@ref'].id)">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="deleteUser(user.ref['@ref'].id)">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
+<div class="desktop-view mat-elevation-z8">
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let user"> {{ user.data.username }} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let user; columns: displayedColumns"></tr>
-</table>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let user"> {{ user.data.email }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approved">
+            <th mat-header-cell *matHeaderCellDef> Approved </th>
+            <td mat-cell *matCellDef="let user"> {{ user.data.approved }} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let user">
+                <button mat-icon-button color="primary" (click)="editUser(user.ref['@ref'].id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteUser(user.ref['@ref'].id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+        <tr mat-row *matRowDef="let user; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div class="mobile-view">
+    <div class="card-container">
+        <mat-card *ngFor="let user of users" class="comment-card">
+            <mat-card-content class="comment-container">
+                <div class="initial-square">{{ user.data.username.charAt(0) }}</div>
+
+                <div class="comment-details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <p><strong>Username</strong></p>
+                                <p>{{ user.data.username }}</p>
+                            </div>
+                            <div class="col">
+                                <p><strong>email</strong></p>
+                                <p>{{ user.data.email }}</p>
+                            </div>
+                            <div class="col">
+                                <p><strong>approved</strong></p>
+                                <p>{{ user.data.approved }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-icon-button color="primary" (click)="editUser(user.ref['@ref'].id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteUser(user.ref['@ref'].id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

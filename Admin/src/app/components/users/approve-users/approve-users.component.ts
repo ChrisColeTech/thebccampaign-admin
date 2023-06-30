@@ -9,8 +9,9 @@ import { UserService } from 'src/app/services/user/user-service';
   styleUrls: ['./approve-users.component.scss']
 })
 export class ApproveUsersComponent implements OnInit {
-  users: any[];
-  displayedColumns: string[] = ['name', 'email', 'user', 'actions'];
+  users: any[] = [];
+  selectedUsers: any[] = [];
+  displayedColumns: string[] = ['select', 'username', 'email', 'approved', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   constructor(private alertsService: AlertsService, private userService: UserService) { }
@@ -20,13 +21,71 @@ export class ApproveUsersComponent implements OnInit {
   }
 
   fetchUnapprovedUsers() {
-    this.userService.getUsers().subscribe(
+    this.userService.getUnapprovedUsers().subscribe(
       (data) => {
         this.users = data;
         this.dataSource = new MatTableDataSource(this.users);
       },
       (error) => {
         this.alertsService.showError('Error fetching users:', error);
+      }
+    );
+  }
+
+  toggleAllSelection() {
+    if (this.selectedUsers.length === this.users.length) {
+      this.selectedUsers = [];
+    } else {
+      this.selectedUsers = this.users.slice();
+    }
+  }
+
+  toggleUserSelection(user: any) {
+    const index = this.selectedUsers.indexOf(user);
+    if (index > -1) {
+      this.selectedUsers.splice(index, 1);
+    } else {
+      this.selectedUsers.push(user);
+    }
+  }
+
+  isAllSelected() {
+    return this.selectedUsers.length === this.users.length;
+  }
+
+  isSomeSelected() {
+    return (
+      this.selectedUsers.length > 0 &&
+      this.selectedUsers.length < this.users.length
+    );
+  }
+
+  bulkApprove() {
+    const userIds = this.selectedUsers.map(user => user.ref['@ref'].id);
+    const data = { userIds: userIds };
+    this.userService.approveUsers(data).subscribe(
+      (response) => {
+        this.alertsService.showMessage('Users approved', response);
+        this.fetchUnapprovedUsers();
+        this.selectedUsers = [];
+      },
+      (error) => {
+        this.alertsService.showError('Error approving users', error);
+      }
+    );
+  }
+
+  bulkDeny() {
+    const userIds = this.selectedUsers.map(user => user.ref['@ref'].id);
+    const data = { userIds: userIds };
+    this.userService.deleteUsers(data).subscribe(
+      (response) => {
+        this.alertsService.showMessage('Users deleted', response);
+        this.fetchUnapprovedUsers();
+        this.selectedUsers = [];
+      },
+      (error) => {
+        this.alertsService.showError('Error deleting users', error);
       }
     );
   }
@@ -48,7 +107,7 @@ export class ApproveUsersComponent implements OnInit {
     const data = { ref: userId };
     this.userService.deleteUser(data).subscribe(
       (response) => {
-        this.alertsService.showMessage('User deleted successfully:', response);
+        this.alertsService.showMessage('User deleted', response);
         this.fetchUnapprovedUsers();
       },
       (error) => {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts-service/alerts.service';
 import { UserService } from 'src/app/services/user/user-service';
 
 @Component({
@@ -10,7 +12,8 @@ import { UserService } from 'src/app/services/user/user-service';
 export class CreateUserComponent implements OnInit {
   createUserForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private alertsService: AlertsService, private formBuilder: FormBuilder, private userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.createUserForm = this.formBuilder.group({
@@ -30,10 +33,11 @@ export class CreateUserComponent implements OnInit {
     const password = this.createUserForm.value.password;
 
     this.userService.createUser({ username, email, password }).subscribe(response => {
-      console.log('Create User Response:', response);
+      this.alertsService.showMessage('User created, Approval Pending', response);
       // Handle success response
+      this.router.navigate(['/users']);
     }, error => {
-      console.log('Create User Error:', error);
+      this.alertsService.showError('Create User Error:', error);
       // Handle error response
     });
   }

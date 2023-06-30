@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertsService } from 'src/app/services/alerts-service/alerts.service';
 import { UserService } from 'src/app/services/user/user-service';
 
 @Component({
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
+    private alertsService: AlertsService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error => {
-        console.log('Login Error:', error);
+        this.alertsService.showMessage('Login Error:', error);
         // Handle error response
       }
     );
