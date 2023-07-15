@@ -7,11 +7,19 @@ const handler = async (event) => {
     }
 
     const data = JSON.parse(event.body);
-    console.log('Function `updateUser` invoked', data);
+    const { approved, username, email, password, ref } = data;
+    console.log(`Function 'update' invoked. Update user with ref: ${ref}`);
     // Logic to update a user in the database
 
     try {
-        const response = await client.query(query.Update(query.Ref(query.Collection('users'), data.id), { data }));
+        const response = await client.query(query.Update(query.Ref(query.Collection('users'), ref), {
+            data: {
+                approved: approved,
+                email: email,
+                username: username,
+                password: password,
+            },
+        }))
         console.log('Success', response);
         return {
             statusCode: 200,

@@ -1,4 +1,4 @@
-const { client, query, handleOptions } = require('./faunaClient');
+const { client, query } = require('./faunaClient');
 
 const handler = async (event) => {
   try {
