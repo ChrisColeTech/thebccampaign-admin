@@ -10,7 +10,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './app.material.module';
 import { ComponentsModule } from './components/components.module';
-import { ServicesModule } from './services/services.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +24,6 @@ import { ServicesModule } from './services/services.module';
     BrowserAnimationsModule,
     BrowserModule,
     MaterialModule,
-    ServicesModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
 
