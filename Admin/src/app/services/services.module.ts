@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { AlertsService } from './alerts-service/alerts.service';
+import { CommentService } from './comments/comments-service';
 @NgModule({
     exports: [
-        AlertsService
+        AlertsService,
+        CommentService
     ]
 })
-export class ComponentsModule { }
+export class ServicesModule { }
